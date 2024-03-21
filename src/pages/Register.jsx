@@ -9,7 +9,7 @@ export default function Register (){
     const navigate = useNavigate();
     async function register(ev){
         ev.preventDefault();
-        const response = await fetch('https://yvettes-mern-blog-b1h4ysmae-rene-rodriguezs-projects.vercel.app/register', {
+        const response = await fetch('https://yvettes-mern-blog-plum.vercel.app/register', {
             method: 'POST',
             body: JSON.stringify({username, password, email,firstName, lastName}),
             headers: {'Content-Type': 'application/json'},
