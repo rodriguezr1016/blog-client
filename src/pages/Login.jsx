@@ -11,7 +11,7 @@ export default function Login (){
     
     async function login(ev) {
         ev.preventDefault();
-        const response = await fetch('https://yvettes-mern-blog-b1h4ysmae-rene-rodriguezs-projects.vercel.app/login',{
+        const response = await fetch('https://yvettes-mern-blog-plum.vercel.app/login',{
             method: 'POST',
             body: JSON.stringify({username, password}),
             headers: {'Content-Type': 'application/json'},
