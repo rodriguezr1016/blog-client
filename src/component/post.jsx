@@ -6,7 +6,7 @@ function Post ({title, firstName,lastName, summary,author, cover, content, creat
         <div className="post">
         <div className="image">
           <Link to={`/post/${_id}`}>
-            <img className='postpic'src={'https://yvettes-mern-blog-plum.vercel.app/'+cover} alt="tree" />
+            <img className='postpic'src={cover} alt="tree" />
 
           </Link>
         </div>
