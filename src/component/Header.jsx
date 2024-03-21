@@ -7,7 +7,7 @@ function Header() {
     const {setUserInfo, userInfo} = useContext(UserContext);
     const navigate = useNavigate();
     useEffect(() => {
-        fetch('https://yvettes-mern-blog-b1h4ysmae-rene-rodriguezs-projects.vercel.app/profile', {
+        fetch('https://yvettes-mern-blog-plum.vercel.app/profile', {
             credentials: 'include',
         }).then(response => {
             response.json().then(userInfo => {
@@ -18,7 +18,7 @@ function Header() {
     }, []);
 
     function logout() {
-        fetch('https://yvettes-mern-blog-b1h4ysmae-rene-rodriguezs-projects.vercel.app/logout', {
+        fetch('https://yvettes-mern-blog-plum.vercel.app/logout', {
             credentials: 'include',
             method: 'POST',
         });
