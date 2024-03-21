@@ -13,7 +13,7 @@ export default function PostPage() {
 
     const deletePost = async (id) => {
   try {
-    const response = await fetch(`http://localhost:4000/post/${postInfo._id}`, {
+    const response = await fetch(`https://yvettes-mern-blog-b1h4ysmae-rene-rodriguezs-projects.vercel.app/post/${postInfo._id}`, {
       method: 'DELETE',
     });
     if(response.ok) {
@@ -33,7 +33,7 @@ export default function PostPage() {
     };
     
     useEffect(() => {
-        fetch(`http://localhost:4000/post/${id}`)
+        fetch(`https://yvettes-mern-blog-b1h4ysmae-rene-rodriguezs-projects.vercel.app/post/${id}`)
         .then(response => {
             response.json().then(postInfo => {
                 setPostInfo(postInfo);
@@ -68,7 +68,7 @@ if (!postInfo) return <div>Loading...</div>;
             )}
             
             <div className="image">
-            <img src={`http://localhost:4000/${postInfo.cover}`} alt="yuh" />
+            <img src={`https://yvettes-mern-blog-b1h4ysmae-rene-rodriguezs-projects.vercel.app/${postInfo.cover}`} alt="yuh" />
             </div>
             <div className="info">
                 <div className="author">By: {postInfo.firstName} {postInfo.lastName}</div>
