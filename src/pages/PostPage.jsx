@@ -68,7 +68,7 @@ if (!postInfo) return <div>Loading...</div>;
             )}
             
             <div className="image">
-            <img src={`https://yvettes-mern-blog-plum.vercel.app/${postInfo.cover}`} alt="yuh" />
+            <img src={`${postInfo.cover}`} alt="yuh" />
             </div>
             <div className="info">
                 <div className="author">By: {postInfo.firstName} {postInfo.lastName}</div>
