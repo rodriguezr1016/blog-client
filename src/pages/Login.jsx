@@ -20,6 +20,19 @@ export default function Login (){
         if (response.ok){
             response.json().then(userInfo => {
                 setUserInfo(userInfo);
+                 response.json().then(userInfo => {
+                        setUserInfo(userInfo);
+                        fetch('https://yvettes-mern-blog-plum.vercel.app/profile', {
+                            credentials: 'include',
+                        }).then(response => {
+                            response.json().then(userInfo => {
+                               setUserInfo(userInfo); 
+                
+                            })
+                        });
+                        setRedirect(true)
+                        navigate('/')
+                    });
                 setRedirect(true)
                 navigate('/')
             });
