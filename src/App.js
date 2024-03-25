@@ -20,26 +20,31 @@ function App() {
       
       const checkToken = () => {
         let token = '';
-           token = document.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1];
-          if (token) {
-              // If the token exists, verify it and fetch user info
-              fetch('https://yvettes-mern-blog-plum.vercel.app/profile', {
-                  credentials: 'include',
-              })
-              .then(response => {
-                  if (!response.ok) {
-                      throw new Error('Network response was not ok');
-                  }
-                  return response.json();
-              })
-              .then(userInfo => {
-                  setUserInfo(userInfo);
-                  setUserInfoFromContext(userInfo); // Update the context with the fetched user info
-              })
-              .catch(error => {
-                  console.error('There was a problem with your fetch operation:', error);
-              });
-          }
+        if (token ==='') {
+          return
+        }else {
+
+          token = document.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1];
+         if (token) {
+             // If the token exists, verify it and fetch user info
+             fetch('https://yvettes-mern-blog-plum.vercel.app/profile', {
+                 credentials: 'include',
+             })
+             .then(response => {
+                 if (!response.ok) {
+                     throw new Error('Network response was not ok');
+                 }
+                 return response.json();
+             })
+             .then(userInfo => {
+                 setUserInfo(userInfo);
+                 setUserInfoFromContext(userInfo); // Update the context with the fetched user info
+             })
+             .catch(error => {
+                 console.error('There was a problem with your fetch operation:', error);
+             });
+         }
+        }
       };
 
       checkToken();
