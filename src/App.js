@@ -17,8 +17,10 @@ function App() {
     const { setUserInfo: setUserInfoFromContext } = useContext(UserContext);
     useEffect(() => {
       // Function to check for the JWT token cookie
+      
       const checkToken = () => {
-          const token = document.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1];
+        let token = '';
+           token = document.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1];
           if (token) {
               // If the token exists, verify it and fetch user info
               fetch('https://yvettes-mern-blog-plum.vercel.app/profile', {
