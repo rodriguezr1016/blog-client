@@ -10,7 +10,39 @@ import CreatePost from './pages/CreatePost';
 import PostPage from './pages/PostPage';
 import EditPost from './pages/EditPost';
 import { Analytics } from "@vercel/analytics/react"
+import React, { useEffect, useState, useContext } from 'react';
+import { UserContext } from '../UserContext';
 function App() {
+  const [userInfo, setUserInfo] = useState(null);
+    const { setUserInfo: setUserInfoFromContext } = useContext(UserContext);
+    useEffect(() => {
+      // Function to check for the JWT token cookie
+      const checkToken = () => {
+          const token = document.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1];
+          if (token) {
+              // If the token exists, verify it and fetch user info
+              fetch('https://yvettes-mern-blog-plum.vercel.app/profile', {
+                  credentials: 'include',
+              })
+              .then(response => {
+                  if (!response.ok) {
+                      throw new Error('Network response was not ok');
+                  }
+                  return response.json();
+              })
+              .then(userInfo => {
+                  setUserInfo(userInfo);
+                  setUserInfoFromContext(userInfo); // Update the context with the fetched user info
+              })
+              .catch(error => {
+                  console.error('There was a problem with your fetch operation:', error);
+              });
+          }
+      };
+
+      checkToken();
+  }, []);
+
   return (
     <UserContextProvider>
       <Analytics />

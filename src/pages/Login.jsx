@@ -20,9 +20,11 @@ export default function Login (){
         if (response.ok){
             response.json().then(userInfo => {
                 setUserInfo(userInfo);
+                const token = userInfo.token
+                localStorage.setItem('jwt', token)
                 setRedirect(true)
                 navigate('/')
-            });
+            })
         } else {
             alert('Wrong Credentials')
         }
