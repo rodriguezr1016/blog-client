@@ -20,7 +20,8 @@ export default function Login (){
         if (response.ok){
             response.json().then(userInfo => {
                 setUserInfo(userInfo);
-                 response.json().then(userInfo => {
+                if (response.ok){
+                    response.json().then(userInfo => {
                         setUserInfo(userInfo);
                         fetch('https://yvettes-mern-blog-plum.vercel.app/profile', {
                             credentials: 'include',
@@ -30,11 +31,10 @@ export default function Login (){
                 
                             })
                         });
-                        setRedirect(true)
-                        navigate('/')
                     });
+                }
                 setRedirect(true)
-                navigate('/')
+                
             });
         } else {
             alert('Wrong Credentials')
@@ -42,7 +42,7 @@ export default function Login (){
         
         if(redirect) {
             console.log('hello');
-            // navigate('/')
+            navigate('/')
 
         }
 
