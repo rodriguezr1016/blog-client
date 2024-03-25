@@ -11,7 +11,7 @@ import PostPage from './pages/PostPage';
 import EditPost from './pages/EditPost';
 import { Analytics } from "@vercel/analytics/react"
 import React, { useEffect, useState, useContext } from 'react';
-import { UserContext } from '../UserContext';
+import { UserContext } from './UserContext';
 function App() {
   const [userInfo, setUserInfo] = useState(null);
     const { setUserInfo: setUserInfoFromContext } = useContext(UserContext);
