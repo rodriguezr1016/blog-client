@@ -1,8 +1,20 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
+import { UserContext } from '../UserContext';
 import 'react-quill/dist/quill.snow.css'
 import { Navigate} from 'react-router-dom';
 import Editor from '../component/Editor';
 export default function CreatePost(){
+    const {setUserInfo, userInfo} = useContext(UserContext);
+    useEffect(() => {
+        fetch('https://yvettes-mern-blog-plum.vercel.app/profile', {
+            credentials: 'include',
+        }).then(response => {
+            response.json().then(userInfo => {
+               setUserInfo(userInfo); 
+
+            })
+        });
+    }, []);
     const [title, setTitle] = useState('');
     const [summary, setSummary] = useState('');
     const [files, setFiles] = useState('');
