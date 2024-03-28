@@ -12,43 +12,32 @@ import EditPost from './pages/EditPost';
 import { Analytics } from "@vercel/analytics/react"
 import React, { useEffect, useState, useContext } from 'react';
 import { UserContext } from './UserContext';
+
+const fetchUserInfo = async (token) => {
+ const response = await fetch('https://yvettes-mern-blog-plum.vercel.app/profile', {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+ });
+ if (!response.ok) {
+    throw new Error('Failed to fetch user info');
+ }
+ return response.json();
+};
+
 function App() {
-  const [userInfo, setUserInfo] = useState(null);
-    const { setUserInfo: setUserInfoFromContext } = useContext(UserContext);
-    useEffect(() => {
-      // Function to check for the JWT token cookie
-      
-      const checkToken = () => {
-        let token = '';
-        if (token ==='') {
-          return
-        }else {
+  const { setUserInfo } = useContext(UserContext);
 
-          token = document.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1];
-         if (token) {
-             // If the token exists, verify it and fetch user info
-             fetch('https://yvettes-mern-blog-plum.vercel.app/profile', {
-                 credentials: 'include',
-             })
-             .then(response => {
-                 if (!response.ok) {
-                     throw new Error('Network response was not ok');
-                 }
-                 return response.json();
-             })
-             .then(userInfo => {
-                 setUserInfo(userInfo);
-                 setUserInfoFromContext(userInfo); // Update the context with the fetched user info
-             })
-             .catch(error => {
-                 console.error('There was a problem with your fetch operation:', error);
-             });
-         }
-        }
-      };
-
-      checkToken();
-  }, []);
+  useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      // Fetch user info using the token
+      fetchUserInfo(token).then(userInfo => {
+        setUserInfo(userInfo);
+        // Optionally, set any other state related to the user's session
+      });
+   }
+   }, []);
 
   return (
     <UserContextProvider>
