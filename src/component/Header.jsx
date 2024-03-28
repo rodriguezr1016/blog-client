@@ -18,6 +18,7 @@ function Header() {
     }, []);
 
     function logout() {
+        localStorage.removeItem('jwt');
         fetch('https://yvettes-mern-blog-plum.vercel.app/logout', {
             credentials: 'include',
             method: 'POST',
